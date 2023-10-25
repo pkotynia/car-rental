@@ -16,7 +16,7 @@ public class CarRentalController {
     }
 
     @PostMapping
-    public CarRentalModel save(@RequestBody CarRentalModel carRentalModel){
+    public CarRentalModel save(@RequestBody CarRentalModel carRentalModel) {
         return service.save(carRentalModel);
     }
 }

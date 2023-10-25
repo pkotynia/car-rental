@@ -19,7 +19,7 @@ class CarRentalRepositoryTest {
         CarRentalModel carRental = new CarRentalModel(
                 null, "Car for Rent", "www.cars.com",
                 "Warszawa", "Jan Kowalski");
-        
+
         //when
 //        repository.save(carRental);
         CarRentalModel result = repository.save(carRental);
