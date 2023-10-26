@@ -2,9 +2,12 @@ package com.sda.carrental.car_rental_facility;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Table(name = "car_rental")
-public class CarRentalModel {
+public class CarRentalModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +21,17 @@ public class CarRentalModel {
 
     private String owner;
 
-    public CarRentalModel(Long id, String name, String internetDomain, String address, String owner) {
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "car_rental_id")
+    private List<CompanyBranchModel> branches;
+
+    public CarRentalModel(Long id, String name, String internetDomain, String address, String owner, List<CompanyBranchModel> branches) {
         this.id = id;
         this.name = name;
         this.internetDomain = internetDomain;
         this.address = address;
         this.owner = owner;
+        this.branches = branches;
     }
 
     public CarRentalModel() {}
@@ -68,6 +76,14 @@ public class CarRentalModel {
         this.owner = owner;
     }
 
+    public List<CompanyBranchModel> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(List<CompanyBranchModel> branches) {
+        this.branches = branches;
+    }
+
     @Override
     public String toString() {
         return "CarRentalModel{" +
@@ -76,6 +92,7 @@ public class CarRentalModel {
                 ", internetDomain='" + internetDomain + '\'' +
                 ", address='" + address + '\'' +
                 ", owner='" + owner + '\'' +
+                ", branches=" + branches +
                 '}';
     }
 }
