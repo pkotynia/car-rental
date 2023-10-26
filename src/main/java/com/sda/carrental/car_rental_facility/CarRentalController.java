@@ -17,4 +17,9 @@ public class CarRentalController {
     public CarRentalModel save(@RequestBody CarRentalModel carRentalModel) {
         return service.save(carRentalModel);
     }
+
+    @GetMapping("/{id}")
+    public CarRentalModel getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
 }
