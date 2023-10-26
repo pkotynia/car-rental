@@ -2,29 +2,37 @@ package com.sda.carrental.car_rental_facility;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "car_rental")
 public class CarRentalModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     private String name;
+
     private String internetDomain;
+
     private String address;
+
     private String owner;
 
-    public CarRentalModel(Long id, String name, String internetDomain, String address, String owner) {
+    @OneToMany(mappedBy = "carRentalModel", cascade = CascadeType.ALL)
+    private List<CompanyBranchModel> branches;
+
+    public CarRentalModel(Long id, String name, String internetDomain, String address, String owner, List<CompanyBranchModel> branches) {
         this.id = id;
         this.name = name;
         this.internetDomain = internetDomain;
         this.address = address;
         this.owner = owner;
+        this.branches = branches;
     }
 
-    public CarRentalModel() {
-    }
+    public CarRentalModel() {}
 
     public Long getId() {
         return id;
@@ -66,6 +74,14 @@ public class CarRentalModel {
         this.owner = owner;
     }
 
+    public List<CompanyBranchModel> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(List<CompanyBranchModel> branches) {
+        this.branches = branches;
+    }
+
     @Override
     public String toString() {
         return "CarRentalModel{" +
@@ -74,6 +90,7 @@ public class CarRentalModel {
                 ", internetDomain='" + internetDomain + '\'' +
                 ", address='" + address + '\'' +
                 ", owner='" + owner + '\'' +
+                ", branches=" + branches +
                 '}';
     }
 }

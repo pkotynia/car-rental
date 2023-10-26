@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -16,9 +18,13 @@ class CarRentalRepositoryTest {
     void shouldSaveCarRentalObject() {
 
         //given
+        CompanyBranchModel branch1 = new CompanyBranchModel(null, "Kielce");
+        CompanyBranchModel branch2 = new CompanyBranchModel(null, "Poznań");
+
+        List<CompanyBranchModel> branches = List.of(branch1, branch2);
         CarRentalModel carRental = new CarRentalModel(
                 null, "Car for Rent", "www.cars.com",
-                "Warszawa", "Jan Kowalski");
+                "Warszawa", "Jan Kowalski", branches);
 
         //when
 //        repository.save(carRental);
@@ -28,6 +34,8 @@ class CarRentalRepositoryTest {
         //then
 //        assertEquals(1, repository.count());
         assertEquals("Warszawa", result.getAddress());
+        assertEquals(2, result.getBranches().size());
+
     }
 
 }
