@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS company_branch;
-DROP TABLE car_rental;
+DROP TABLE IF EXISTS car_rental;
 CREATE TABLE car_rental (
     id              BIGINT AUTO_INCREMENT UNIQUE PRIMARY KEY,
     name            VARCHAR(255) NOT NULL,

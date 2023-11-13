@@ -1,6 +1,7 @@
 package com.sda.carrental.car_rental_facility;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -12,15 +13,20 @@ public class CarRentalModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Name field can't be null")
     private String name;
 
+    @NotNull(message = "Internet domain field can't be null")
     private String internetDomain;
 
+    @NotNull(message = "Address field can't be null")
     private String address;
 
+    @NotNull(message = "Owner field can't be null")
     private String owner;
 
-    @OneToMany(mappedBy = "carRentalModel", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "car_rental_id")
     private List<CompanyBranchModel> branches;
 
     public CarRentalModel(Long id, String name, String internetDomain, String address, String owner, List<CompanyBranchModel> branches) {
@@ -32,7 +38,8 @@ public class CarRentalModel {
         this.branches = branches;
     }
 
-    public CarRentalModel() {}
+    public CarRentalModel() {
+    }
 
     public Long getId() {
         return id;
