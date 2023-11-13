@@ -1,6 +1,7 @@
 package com.sda.carrental.car_rental_facility;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -12,8 +13,10 @@ public class CarRentalModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @NotNull(message = "name field can't be null")
 
+    private String name;
+    @NotNull(message = "Internet Domain field can't be null")
     private String internetDomain;
 
     private String address;
