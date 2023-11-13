@@ -20,8 +20,10 @@ public class CarRentalModel {
 
     private String owner;
 
-    @OneToMany(mappedBy = "carRentalModel", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "car_rental_id")
     private List<CompanyBranchModel> branches;
+
 
     public CarRentalModel(Long id, String name, String internetDomain, String address, String owner, List<CompanyBranchModel> branches) {
         this.id = id;
