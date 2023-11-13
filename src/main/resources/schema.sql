@@ -14,6 +14,6 @@ CREATE TABLE company_branch
 (
     id            BIGINT AUTO_INCREMENT UNIQUE PRIMARY KEY,
     name          VARCHAR(255) NOT NULL,
-    car_rental_id BIGINT       NOT NULL,
+    car_rental_id BIGINT       ,
     FOREIGN KEY (car_rental_id) REFERENCES car_rental (id)
 );

@@ -39,6 +39,8 @@ public class CompanyBranchModel{
     }
 
 
+
+
     @Override
     public String toString() {
         return "CompanyBranchModel{" +
@@ -47,6 +49,4 @@ public class CompanyBranchModel{
                 ", carRentalModel=" + carRentalModel +
                 '}';
     }
-
-
 }

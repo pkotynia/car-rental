@@ -42,5 +42,4 @@ class CarRentalRepositoryTest {
         assertEquals(2,result.getBranches().size());
 
     }
-
 }
