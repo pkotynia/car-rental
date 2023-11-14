@@ -18,9 +18,9 @@ public class CarRentalModel {
     private String name;
     @NotNull(message = "Internet Domain field can't be null")
     private String internetDomain;
-
+    @NotNull(message = "address field can't be null")
     private String address;
-
+    @NotNull(message = "owner field can't be null")
     private String owner;
 
     @OneToMany(cascade = CascadeType.PERSIST)
