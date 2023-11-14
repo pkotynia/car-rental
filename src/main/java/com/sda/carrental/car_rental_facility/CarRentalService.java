@@ -7,7 +7,7 @@ import java.util.Optional;
 @Service
 public class CarRentalService {
 
-    private CarRentalRepository repository;
+    private final CarRentalRepository repository;
 
     public CarRentalService(CarRentalRepository repository) {
         this.repository = repository;

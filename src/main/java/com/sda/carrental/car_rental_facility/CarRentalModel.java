@@ -1,24 +1,28 @@
 package com.sda.carrental.car_rental_facility;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "car_rental")
-public class CarRentalModel implements Serializable {
+public class CarRentalModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "field can't be null")
     private String name;
 
+    @NotNull(message = "field can't be null")
     private String internetDomain;
 
+    @NotNull(message = "field can't be null")
     private String address;
 
+    @NotNull(message = "field can't be null")
     private String owner;
 
     @OneToMany(cascade = CascadeType.PERSIST)

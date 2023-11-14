@@ -1,5 +1,6 @@
 package com.sda.carrental.car_rental_facility;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class CarRentalRepositoryTest {
 
     @Autowired
@@ -37,6 +39,15 @@ class CarRentalRepositoryTest {
         assertEquals("Sosnowiec", result.getAddress());
         assertEquals("Janusz", result.getOwner());
         assertEquals(2, result.getBranches().size());
+    }
+
+    @Test
+    void shouldCountCarRentals() {
+        //when
+        long count = repository.count();
+
+        //then
+        assertEquals(0, count);
     }
 
 }

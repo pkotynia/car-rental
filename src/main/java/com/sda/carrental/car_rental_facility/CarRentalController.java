@@ -1,20 +1,20 @@
 package com.sda.carrental.car_rental_facility;
 
-import org.springframework.stereotype.Controller;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/car_rentals")
 public class CarRentalController {
 
-    private CarRentalService service;
+    private final CarRentalService service;
 
     public CarRentalController(CarRentalService service) {
         this.service = service;
     }
 
     @PostMapping
-    public CarRentalModel save(@RequestBody CarRentalModel carRentalModel) {
+    public CarRentalModel save(@RequestBody @Valid CarRentalModel carRentalModel) {
         return service.save(carRentalModel);
     }
 
