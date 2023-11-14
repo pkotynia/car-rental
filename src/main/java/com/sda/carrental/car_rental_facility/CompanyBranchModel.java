@@ -1,17 +1,19 @@
 package com.sda.carrental.car_rental_facility;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "company_branch")
-public class CompanyBranchModel implements Serializable {
+public class CompanyBranchModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "field can't be null")
     private String name;
 
     public CompanyBranchModel(Long id, String name) {
