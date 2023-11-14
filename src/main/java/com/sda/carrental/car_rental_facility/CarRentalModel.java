@@ -13,19 +13,19 @@ public class CarRentalModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Name field can't be null")
+    @NotNull(message = "field can't be null")
     private String name;
 
-    @NotNull(message = "Internet domain field can't be null")
+    @NotNull(message = "field can't be null")
     private String internetDomain;
 
-    @NotNull(message = "Address field can't be null")
+    @NotNull(message = "field can't be null")
     private String address;
 
-    @NotNull(message = "Owner field can't be null")
+    @NotNull(message = "field can't be null")
     private String owner;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_rental_id")
     private List<CompanyBranchModel> branches;
 
