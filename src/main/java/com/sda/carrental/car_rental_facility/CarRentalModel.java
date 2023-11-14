@@ -25,7 +25,7 @@ public class CarRentalModel {
     @NotNull(message = "field can't be null")
     private String owner;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_rental_id")
     private List<CompanyBranchModel> branches;
 
