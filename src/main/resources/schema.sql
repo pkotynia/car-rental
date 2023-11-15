@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS rent;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS company_branch;
 DROP TABLE IF EXISTS car_rental;
@@ -28,4 +29,13 @@ CREATE TABLE reservation (
     end_branch_id BIGINT,
     FOREIGN KEY (start_branch_id) REFERENCES company_branch(id),
     FOREIGN KEY (end_branch_id) REFERENCES company_branch(id)
+);
+
+CREATE TABLE rent (
+    id BIGINT AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    employee VARCHAR(255) NOT NULL,
+    comments VARCHAR(255) NOT NULL,
+    rent_date DATE NOT NULL,
+    reservation_id BIGINT NOT NULL,
+    FOREIGN KEY (reservation_id) REFERENCES reservation(id)
 );

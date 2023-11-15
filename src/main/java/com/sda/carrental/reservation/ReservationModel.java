@@ -2,6 +2,9 @@ package com.sda.carrental.reservation;
 
 import com.sda.carrental.car_rental_facility.CompanyBranchModel;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -27,6 +30,9 @@ public class ReservationModel {
     @NotNull
     private LocalDate endDate;
 
+    @DecimalMin(value = "1.00", message = "Price must be grater than 1.00")
+    @DecimalMax(value = "10000.00", message = "Price must be less than 10000.00")
+    @Digits(integer = 7, fraction = 2, message = "Price must have up to 7 digits in total and 2 decimal places")
     private BigDecimal price;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -47,6 +53,8 @@ public class ReservationModel {
         this.startBranch = startBranch;
         this.endBranch = endBranch;
     }
+
+    public ReservationModel() {}
 
     public Long getId() {
         return id;
