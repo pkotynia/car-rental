@@ -1,5 +1,6 @@
 package com.sda.carrental.car_rental_facility;
 
+import com.sda.carrental.reservation.RentAlreadyExistsForReservation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -15,6 +16,11 @@ public class GlobalExceptionHandling {
     @ExceptionHandler(ObjectNotFoundInRepositoryException.class)
     public ProblemDetail handleObjectNotFoundInRepository(ObjectNotFoundInRepositoryException exception) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.getMessage());
+    }
+
+    @ExceptionHandler(RentAlreadyExistsForReservation.class)
+    public ProblemDetail handleRentAlreadyExistsForReservation(RentAlreadyExistsForReservation exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -1,6 +1,7 @@
 package com.sda.carrental.reservation;
 
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ReservationModel save(@RequestBody ReservationModel reservation) {
+    public ReservationModel save(@RequestBody @Valid ReservationModel reservation) {
         return service.saveReservation(reservation);
     }
 }
