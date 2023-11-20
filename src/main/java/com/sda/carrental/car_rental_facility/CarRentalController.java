@@ -8,20 +8,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/car_rentals")
 public class CarRentalController {
 
-    private CarRentalService service;
+    private final CarRentalService service;
 
     public CarRentalController(CarRentalService service) {
         this.service = service;
     }
 
     @PostMapping
-    public CarRentalModel save(@RequestBody @Valid CarRentalModel carRentalModel){
+    public CarRentalModel save(@RequestBody @Valid CarRentalModel carRentalModel) {
         return service.save(carRentalModel);
     }
 
     @GetMapping("/{id}")
-    public CarRentalModel getById(@PathVariable Long id){
+    public CarRentalModel getById(@PathVariable Long id) {
         return service.getById(id);
     }
-
 }

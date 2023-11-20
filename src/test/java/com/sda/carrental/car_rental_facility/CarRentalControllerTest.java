@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CarRentalControllerTest {
+
     @Autowired
     private WebTestClient testClient;
 
@@ -25,7 +26,7 @@ class CarRentalControllerTest {
         CarRentalModel carRental = new CarRentalModel(
                 null,
                 "Cars for Rent",
-                "www.cars.com",
+                "www.superCars.com",
                 "Wroclaw",
                 "Pablo",
                 branches

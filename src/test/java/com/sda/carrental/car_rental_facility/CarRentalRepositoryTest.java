@@ -39,7 +39,7 @@ class CarRentalRepositoryTest {
         //then
         assertEquals("Wroclaw", result.getAddress());
         assertEquals("Pablo", result.getOwner());
-        assertEquals(2,result.getBranches().size());
+        assertEquals(2, result.getBranches().size());
 
     }
 }
