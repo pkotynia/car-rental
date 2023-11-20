@@ -6,13 +6,13 @@ import com.sda.carrental.car_rental_facility.ObjectNotFoundInRepositoryException
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final BranchesRepository branchesRepository;
-
     private final CarRepository carRepository;
 
     public ReservationService(ReservationRepository repository, BranchesRepository branchesRepository, CarRepository carRepository) {
@@ -24,41 +24,34 @@ public class ReservationService {
     ReservationModel saveReservation(ReservationDTO reservationDTO) {
         ReservationModel reservation = new ReservationModel();
 
-        reservation.setEndBranch(reservationDTO.endBranch());
-        reservation.setStartBranch(reservationDTO.startBranch());
-        setStartBranchIfExists(reservation);
-        setEndBranchIfExists(reservation);
+        setStartAndEndBranch(reservationDTO, reservation);
 
         reservation.setCustomer(reservationDTO.customer());
         reservation.setStartDate(reservationDTO.startDate());
         reservation.setEndDate(reservationDTO.endDate());
-        //todo fixme
-        reservation.setPrice(new BigDecimal(100));
 
         CarModel carFromRepo = carRepository.findById(reservationDTO.carId())
                 .orElseThrow(() -> new ObjectNotFoundInRepositoryException("car not found"));
 
         reservation.setCar(carFromRepo);
 
+        long daysDifference = ChronoUnit.DAYS.between(reservation.getStartDate(), reservation.getEndDate());
+        BigDecimal price = carFromRepo.getPrice().multiply(new BigDecimal(daysDifference));
+        reservation.setPrice(price);
+
         return reservationRepository.save(reservation);
     }
 
-    private void setEndBranchIfExists(ReservationModel reservation) {
-        String endBranchName = reservation.getEndBranch().getName();
-        CompanyBranchModel endBranch = getCompanyBranchModel(endBranchName);
-        reservation.setEndBranch(endBranch);
+    private void setStartAndEndBranch(ReservationDTO reservationDTO, ReservationModel reservation) {
+        CompanyBranchModel startBranchFromRepo = branchesRepository.findById(reservationDTO.startBranchId())
+                        .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Branch not found"));
+        reservation.setStartBranch(startBranchFromRepo);
+
+        CompanyBranchModel endBranchFromRepo = branchesRepository.findById(reservationDTO.endBranchId())
+                        .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Branch not found"));
+        reservation.setEndBranch(endBranchFromRepo);
     }
 
-    private void setStartBranchIfExists(ReservationModel reservation) {
-        String startBranchName = reservation.getStartBranch().getName();
-        CompanyBranchModel startBranch = getCompanyBranchModel(startBranchName);
-        reservation.setStartBranch(startBranch);
-    }
-
-    private CompanyBranchModel getCompanyBranchModel(String endBranchName) {
-        return branchesRepository.findByName(endBranchName)
-                .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Branch with name " + endBranchName + " not found"));
-    }
 }
 
 
