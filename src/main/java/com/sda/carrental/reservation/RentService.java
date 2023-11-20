@@ -16,29 +16,40 @@ public class RentService {
         this.reservationRepository = reservationRepository;
     }
 
-    RentModel save(RentDTO rentModel) throws RentAlreadyExistsForReservation {
+    RentModel save(RentDTO rentDTO) throws RentAlreadyExistsForReservation {
         //check if rent with given reservation is already exists in database
-        List<Object[]> reservationIds = rentRepository.findRentalswithReservationId(rentModel.reservationId());
-        if (!reservationIds.isEmpty()) {
-            throw new RentAlreadyExistsForReservation("Rent already exists for reservation with id "
-                    + rentModel.reservationId());
-        }
+        throwExceptionIfRentWithReservationIdAlreadyExist(rentDTO.reservationId());
+        RentModel rentToSave = createRentModelObjectBaseOnRentDTO(rentDTO);
+        return rentRepository.save(rentToSave);
+    }
 
-        //if exists we need to throw exception. it's not possible to have more than one rent
-        // for the same reservation
-
-
+    private RentModel createRentModelObjectBaseOnRentDTO(RentDTO rentModel) {
         RentModel rentToSave = new RentModel();
         rentToSave.setEmployee(rentModel.employee());
         rentToSave.setRentDate(rentModel.rentDate());
         rentToSave.setComments(rentModel.comments());
 
-        ReservationModel reservationFromRepository = reservationRepository.findById(rentModel.reservationId())
-                .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Reservation with id " +
-                        rentModel.reservationId() + " not found"));
+        ReservationModel reservationFromRepository = findReservationById(rentModel.reservationId());
         rentToSave.setReservation(reservationFromRepository);
+        return rentToSave;
+    }
 
+    //if exists we need to throw exception. it's not possible to have more than one rent
+    // for the same reservation
+    private ReservationModel findReservationById(Long reservationId) {
+        return reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Reservation with id " +
+                        reservationId + " not found"));
+    }
 
-        return rentRepository.save(rentToSave);
+    private void throwExceptionIfRentWithReservationIdAlreadyExist(Long reservationId) {
+        //we are using custom method added to repository
+        //which returns List of one element arrays [reservationID]
+        List<Object[]> reservationIds = rentRepository.findRentWithReservationId(reservationId);
+        //we're checking if query is empty to verify that there are no rents for reservation yet
+        if (!reservationIds.isEmpty()) {
+            throw new RentAlreadyExistsForReservation("Rent already exists for reservation with id "
+                    + reservationId);
+        }
     }
 }

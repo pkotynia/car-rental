@@ -5,7 +5,7 @@ import com.sda.carrental.car_rental_facility.CompanyBranchModel;
 import com.sda.carrental.car_rental_facility.ObjectNotFoundInRepositoryException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.math.BigDecimal;
 
 @Service
 public class ReservationService {
@@ -13,15 +13,31 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final BranchesRepository branchesRepository;
 
-    public ReservationService(ReservationRepository repository, BranchesRepository branchesRepository) {
+    private final CarRepository carRepository;
+
+    public ReservationService(ReservationRepository repository, BranchesRepository branchesRepository, CarRepository carRepository) {
         this.reservationRepository = repository;
         this.branchesRepository = branchesRepository;
+        this.carRepository = carRepository;
     }
 
-    ReservationModel saveReservation(ReservationModel reservation) {
+    ReservationModel saveReservation(ReservationDTO reservationDTO) {
+        ReservationModel reservation = new ReservationModel();
+
+        reservation.setEndBranch(reservationDTO.endBranch());
+        reservation.setStartBranch(reservationDTO.startBranch());
         //check if start and end branch exist
         setStartBranchIfExists(reservation);
         setEndBranchIfExists(reservation);
+
+        reservation.setCustomer(reservationDTO.customer());
+        reservation.setStartDate(reservationDTO.startDate());
+        reservation.setEndDate(reservationDTO.endDate());
+        reservation.setPrice(new BigDecimal(100));
+
+        CarModel carFromRepo = carRepository.findById(reservationDTO.carId())
+                .orElseThrow(() -> new ObjectNotFoundInRepositoryException("car not found"));
+        reservation.setCar(carFromRepo);
         return reservationRepository.save(reservation);
     }
 

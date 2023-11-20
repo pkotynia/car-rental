@@ -22,7 +22,9 @@ public class ReservationModel {
     private String customer;
 
     @NotNull
-    private String car;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private CarModel car;
 
     @NotNull
     private LocalDate startDate;
@@ -43,7 +45,7 @@ public class ReservationModel {
     @JoinColumn(name = "end_branch_id")
     private CompanyBranchModel endBranch;
 
-    public ReservationModel(Long id, String customer, String car,
+    public ReservationModel(Long id, String customer, CarModel car,
                             LocalDate startDate, LocalDate endDate, BigDecimal price,
                             CompanyBranchModel startBranch, CompanyBranchModel endBranch) {
         this.id = id;
@@ -75,11 +77,11 @@ public class ReservationModel {
         this.customer = customer;
     }
 
-    public String getCar() {
+    public CarModel getCar() {
         return car;
     }
 
-    public void setCar(String car) {
+    public void setCar(CarModel car) {
         this.car = car;
     }
 
