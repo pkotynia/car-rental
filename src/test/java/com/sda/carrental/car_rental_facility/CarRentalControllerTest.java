@@ -3,11 +3,13 @@ package com.sda.carrental.car_rental_facility;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class CarRentalControllerTest {
 
     @Autowired
@@ -32,6 +34,7 @@ class CarRentalControllerTest {
                 .post()
                 .uri("/car_rentals")
                 .bodyValue(carRental)
+                //.headers(headersConsumer -> headersConsumer.setBasicAuth("user", "password"))
                 //when
                 .exchange()
                 //then
