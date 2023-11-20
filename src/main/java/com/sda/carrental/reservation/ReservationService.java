@@ -13,7 +13,6 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final BranchesRepository branchesRepository;
-
     private final CarRepository carRepository;
 
     public ReservationService(ReservationRepository repository, BranchesRepository branchesRepository, CarRepository carRepository) {

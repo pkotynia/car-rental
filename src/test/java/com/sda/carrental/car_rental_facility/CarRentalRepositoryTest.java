@@ -42,4 +42,13 @@ class CarRentalRepositoryTest {
         assertEquals(2, result.getBranches().size());
 
     }
+    @Test
+    void shouldCountCarRentals() {
+        //when
+        long count = repository.count();
+
+        //then
+        assertEquals(0, count);
+    }
+
 }
