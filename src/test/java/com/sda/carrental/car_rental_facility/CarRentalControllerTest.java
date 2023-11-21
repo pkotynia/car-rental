@@ -3,6 +3,8 @@ package com.sda.carrental.car_rental_facility;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 // We are not using any mocks.
 // Application is being run and we use WebTestClient to send the request and assert responses
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class CarRentalControllerTest {
 
     @Autowired
