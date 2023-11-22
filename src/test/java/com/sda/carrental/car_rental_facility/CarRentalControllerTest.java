@@ -23,8 +23,8 @@ class CarRentalControllerTest {
     @Test
     void shouldSaveCarRental() {
         //given - preparing objects that will be used in request body (payload)
-        List<CompanyBranchModel> branches = List.of(
-                new CompanyBranchModel(null, "Radom")
+        List<BranchesModel> branches = List.of(
+                new BranchesModel(null, "Radom")
         );
         CarRentalModel carRental = new CarRentalModel(
                 null,

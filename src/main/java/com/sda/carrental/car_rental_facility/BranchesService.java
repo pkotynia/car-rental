@@ -13,12 +13,12 @@ public class BranchesService {
         this.repository = repository;
     }
 
-    CompanyBranchModel findById(Long id) {
+    BranchesModel findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Branch not found"));
     }
 
-    List<CompanyBranchModel> findAll() {
+    List<BranchesModel> findAll() {
         return repository.findAll();
     }
 }

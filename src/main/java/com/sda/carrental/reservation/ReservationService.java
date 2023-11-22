@@ -1,7 +1,7 @@
 package com.sda.carrental.reservation;
 
 import com.sda.carrental.car_rental_facility.BranchesRepository;
-import com.sda.carrental.car_rental_facility.CompanyBranchModel;
+import com.sda.carrental.car_rental_facility.BranchesModel;
 import com.sda.carrental.car_rental_facility.ObjectNotFoundInRepositoryException;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +42,11 @@ public class ReservationService {
     }
 
     private void setStartAndEndBranch(ReservationDTO reservationDTO, ReservationModel reservation) {
-        CompanyBranchModel startBranchFromRepo = branchesRepository.findById(reservationDTO.startBranchId())
+        BranchesModel startBranchFromRepo = branchesRepository.findById(reservationDTO.startBranchId())
                 .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Branch not found"));
         reservation.setStartBranch(startBranchFromRepo);
 
-        CompanyBranchModel endBranchFromRepo = branchesRepository.findById(reservationDTO.endBranchId())
+        BranchesModel endBranchFromRepo = branchesRepository.findById(reservationDTO.endBranchId())
                 .orElseThrow(() -> new ObjectNotFoundInRepositoryException("Branch not found"));
         reservation.setEndBranch(endBranchFromRepo);
     }

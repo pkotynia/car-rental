@@ -19,7 +19,7 @@ public class BranchesController {
 
     //    wyswietla wszystkie oddzialy
     @GetMapping
-    public List<CompanyBranchDTO> findAll() {
+    public List<BranchesDTO> findAll() {
         return service.findAll()
                 .stream()
                 .map(companyBranchModel -> mapToCompanyBranchDTO(companyBranchModel))
@@ -27,17 +27,17 @@ public class BranchesController {
     }
 
     @GetMapping("/{id}")
-    public CompanyBranchDTO findById(@PathVariable Long id) {
-        CompanyBranchModel companyBranch = service.findById(id);
+    public BranchesDTO findById(@PathVariable Long id) {
+        BranchesModel companyBranch = service.findById(id);
         return mapToCompanyBranchDTO(companyBranch);
     }
 
-    private CompanyBranchDTO mapToCompanyBranchDTO(CompanyBranchModel companyBranch) {
+    private BranchesDTO mapToCompanyBranchDTO(BranchesModel companyBranch) {
         CarRentalModel carRental = companyBranch.getCarRentalModel();
-        return new CompanyBranchDTO(
+        return new BranchesDTO(
                 companyBranch.getId(),
                 companyBranch.getName(),
-                new HQDetails(
+                new BranchesHqDetails(
                         carRental.getName(),
                         carRental.getOwner(),
                         carRental.getInternetDomain(),
@@ -47,8 +47,3 @@ public class BranchesController {
     }
 }
 
-record CompanyBranchDTO(Long branchId, String branchName, HQDetails mainBranchDetails) {
-}
-
-record HQDetails(String carRentalName, String owner, String internetDomain, String address) {
-}

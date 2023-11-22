@@ -1,6 +1,6 @@
 package com.sda.carrental.reservation;
 
-import com.sda.carrental.car_rental_facility.CompanyBranchModel;
+import com.sda.carrental.car_rental_facility.BranchesModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -39,15 +39,15 @@ public class ReservationModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "start_branch_id")
-    private CompanyBranchModel startBranch;
+    private BranchesModel startBranch;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "end_branch_id")
-    private CompanyBranchModel endBranch;
+    private BranchesModel endBranch;
 
     public ReservationModel(Long id, String customer, CarModel car,
                             LocalDate startDate, LocalDate endDate, BigDecimal price,
-                            CompanyBranchModel startBranch, CompanyBranchModel endBranch) {
+                            BranchesModel startBranch, BranchesModel endBranch) {
         this.id = id;
         this.customer = customer;
         this.car = car;
@@ -109,19 +109,19 @@ public class ReservationModel {
         this.price = price;
     }
 
-    public CompanyBranchModel getStartBranch() {
+    public BranchesModel getStartBranch() {
         return startBranch;
     }
 
-    public void setStartBranch(CompanyBranchModel startBranch) {
+    public void setStartBranch(BranchesModel startBranch) {
         this.startBranch = startBranch;
     }
 
-    public CompanyBranchModel getEndBranch() {
+    public BranchesModel getEndBranch() {
         return endBranch;
     }
 
-    public void setEndBranch(CompanyBranchModel endBranch) {
+    public void setEndBranch(BranchesModel endBranch) {
         this.endBranch = endBranch;
     }
 

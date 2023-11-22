@@ -1,7 +1,7 @@
 package com.sda.carrental.reservation;
 
 import com.sda.carrental.car_rental_facility.BranchesRepository;
-import com.sda.carrental.car_rental_facility.CompanyBranchModel;
+import com.sda.carrental.car_rental_facility.BranchesModel;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
@@ -52,10 +52,10 @@ class ReservationServiceTest {
 
         //here we are recording the behavior of branchesRepositoryMock
         //when findById will be invoked in the method code we will return startBranch object
-        CompanyBranchModel startBranch = new CompanyBranchModel(1L, "Warszawa");
+        BranchesModel startBranch = new BranchesModel(1L, "Warszawa");
         Mockito.when(branchesRepositoryMock.findById(1L)).thenReturn(Optional.of(startBranch));
 
-        CompanyBranchModel endBranch = new CompanyBranchModel(2L, "Gdynia");
+        BranchesModel endBranch = new BranchesModel(2L, "Gdynia");
         Mockito.when(branchesRepositoryMock.findById(2L)).thenReturn(Optional.of(endBranch));
 
         //here we are recording the bahavior of carRepositoryMock mock

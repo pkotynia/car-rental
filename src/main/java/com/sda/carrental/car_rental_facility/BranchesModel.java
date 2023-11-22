@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "company_branch")
-public class CompanyBranchModel {
+public class BranchesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +21,12 @@ public class CompanyBranchModel {
     @JsonBackReference
     private CarRentalModel carRentalModel;
 
-    public CompanyBranchModel(Long id, String name) {
+    public BranchesModel(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public CompanyBranchModel() {
+    public BranchesModel() {
     }
 
     public Long getId() {

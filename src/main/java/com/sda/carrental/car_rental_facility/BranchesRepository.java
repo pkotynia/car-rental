@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface BranchesRepository extends JpaRepository<CompanyBranchModel, Long> {
-    Optional<CompanyBranchModel> findByName(String startBranchName);
+public interface BranchesRepository extends JpaRepository<BranchesModel, Long> {
+    Optional<BranchesModel> findByName(String startBranchName);
 }
