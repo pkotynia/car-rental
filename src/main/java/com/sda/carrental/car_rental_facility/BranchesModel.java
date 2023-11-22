@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.io.Serializable;
-
 @Entity
 @Table(name = "company_branch")
-public class CompanyBranchModel {
+public class BranchesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,12 +20,12 @@ public class CompanyBranchModel {
     @JsonBackReference
     private CarRentalModel carRental;
 
-    public CompanyBranchModel(Long id, String name) {
+    public BranchesModel(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public CompanyBranchModel() {}
+    public BranchesModel() {}
 
     public Long getId() {
         return id;

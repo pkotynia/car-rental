@@ -19,10 +19,10 @@ class CarRentalRepositoryTest {
     @Test
     void shouldSaveCarRentalObject() {
         //given
-        CompanyBranchModel branch1 = new CompanyBranchModel(null, "Wroclaw");
-        CompanyBranchModel branch2 = new CompanyBranchModel(null, "Poznań");
+        BranchesModel branch1 = new BranchesModel(null, "Wroclaw");
+        BranchesModel branch2 = new BranchesModel(null, "Poznań");
 
-        List<CompanyBranchModel> branches = List.of(branch1, branch2);
+        List<BranchesModel> branches = List.of(branch1, branch2);
 
         CarRentalModel carRental = new CarRentalModel(
                 null,

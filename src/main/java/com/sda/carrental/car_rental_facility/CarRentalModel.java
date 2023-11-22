@@ -27,9 +27,9 @@ public class CarRentalModel {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_rental_id")
-    private List<CompanyBranchModel> branches;
+    private List<BranchesModel> branches;
 
-    public CarRentalModel(Long id, String name, String internetDomain, String address, String owner, List<CompanyBranchModel> branches) {
+    public CarRentalModel(Long id, String name, String internetDomain, String address, String owner, List<BranchesModel> branches) {
         this.id = id;
         this.name = name;
         this.internetDomain = internetDomain;
@@ -80,11 +80,11 @@ public class CarRentalModel {
         this.owner = owner;
     }
 
-    public List<CompanyBranchModel> getBranches() {
+    public List<BranchesModel> getBranches() {
         return branches;
     }
 
-    public void setBranches(List<CompanyBranchModel> branches) {
+    public void setBranches(List<BranchesModel> branches) {
         this.branches = branches;
     }
 

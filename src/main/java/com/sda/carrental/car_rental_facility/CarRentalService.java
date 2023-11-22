@@ -17,7 +17,7 @@ public class CarRentalService {
         return repository.save(carRentalModel);
     }
 
-    CarRentalModel getById(Long id)  {
+    CarRentalModel getById(Long id) {
         //please do not do this :)
 //        Optional<CarRentalModel> optionalOfCarRental = repository.findById(id);
 //        if (optionalOfCarRental.isPresent()) {
